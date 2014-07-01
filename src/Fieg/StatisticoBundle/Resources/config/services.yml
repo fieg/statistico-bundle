@@ -1,0 +1,12 @@
+services:
+  statistico.driver.redis:
+    class: Fieg\Statistico\Driver\RedisDriver
+    arguments: [@tree_house_cache.client.default.cache]
+
+  statistico:
+    class: Fieg\Statistico\Statistico
+    arguments: [@stats.driver.redis]
+
+  statistico.reader:
+    class: Fieg\Statistico\Reader
+    arguments: [@stats.driver.redis]
