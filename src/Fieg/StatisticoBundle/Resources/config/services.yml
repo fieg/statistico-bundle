@@ -5,8 +5,8 @@ services:
 
   statistico:
     class: Fieg\Statistico\Statistico
-    arguments: [@stats.driver.redis]
+    arguments: [@statistico.driver.redis]
 
   statistico.reader:
     class: Fieg\Statistico\Reader
-    arguments: [@stats.driver.redis]
+    arguments: [@statistico.driver.redis]
