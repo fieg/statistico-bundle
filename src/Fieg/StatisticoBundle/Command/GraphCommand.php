@@ -21,7 +21,7 @@ class GraphCommand extends ContainerAwareCommand
     {
         while (true) {
             /** @var Reader $reader */
-            $reader = $this->getContainer()->get('stats.reader');
+            $reader = $this->getContainer()->get('statistico.reader');
 
             $from = new \DateTime('-1 minute');
             $to = new \DateTime();

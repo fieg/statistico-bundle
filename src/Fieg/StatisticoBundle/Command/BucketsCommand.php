@@ -19,7 +19,7 @@ class BucketsCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         /** @var Reader $reader */
-        $reader = $this->getContainer()->get('stats.reader');
+        $reader = $this->getContainer()->get('statistico.reader');
 
         $buckets = $reader->getBuckets();
 
