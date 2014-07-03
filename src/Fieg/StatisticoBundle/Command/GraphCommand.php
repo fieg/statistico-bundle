@@ -46,8 +46,8 @@ class GraphCommand extends ContainerAwareCommand
             $out = [];
 
             foreach ($buckets as $bucket) {
-                $counts = $reader->queryCounts($bucket, $from, $to);
-                $rpm = $reader->queryRPM($bucket, $to);
+                $counts = $reader->queryCounts($bucket, 'seconds', $from, $to);
+                $rpm = array_sum($counts);
 
                 $minX = $from->getTimestamp();
                 $maxX = $to->getTimestamp();
@@ -63,7 +63,7 @@ class GraphCommand extends ContainerAwareCommand
 
             $this->overwrite($output, implode($out, "\n"));
 
-            usleep(1000);
+            usleep(500 * 1000);
         }
     }
 
