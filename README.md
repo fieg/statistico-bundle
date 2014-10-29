@@ -27,7 +27,7 @@ Usage
 
 Inject statistico into some service:
 
-```yaml
+```yml
 some_service:
     class: Acme\SomeService
     arguments: [@statistico]
