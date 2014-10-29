@@ -20,14 +20,14 @@ Add to `AppKernel.php`:
 $bundles = [
   new Fieg\StatisticoBundle\FiegStatisticoBundle(),
 ];
-``
+```
 
 Usage
 -----
 
 Inject statistico into some service:
 
-```yml
+```yaml
 some_service:
     class: Acme\SomeService
     arguments: [@statistico]
