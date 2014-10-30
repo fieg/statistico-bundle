@@ -22,6 +22,15 @@ $bundles = [
 ];
 ```
 
+Configuration in app/config/config.yml:
+
+```yaml
+fieg_statistico:
+  driver:
+    redis:
+      client: @your_redis_service
+```
+
 Usage
 -----
 
