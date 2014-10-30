@@ -22,7 +22,7 @@ $bundles = [
 ];
 ```
 
-Configuration in app/config/config.yml:
+Configuration in `app/config/config.yml`:
 
 ```yaml
 fieg_statistico:
