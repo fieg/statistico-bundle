@@ -4,6 +4,7 @@ namespace Fieg\StatisticoBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
@@ -24,5 +25,15 @@ class FiegStatisticoExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        if ($redisClient = $config['driver']['redis']['client']) {
+            if ('@' === substr($redisClient, 0, 1)) {
+                $redisClient = substr($redisClient, 1);
+            }
+
+            if ($definition = $container->getDefinition('statistico.driver.redis')) {
+                $definition->replaceArgument(0, new Reference($redisClient));
+            }
+        }
     }
 }

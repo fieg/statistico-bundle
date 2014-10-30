@@ -1,7 +1,8 @@
 services:
   statistico.driver.redis:
     class: Fieg\Statistico\Driver\RedisDriver
-    arguments: [@tree_house_cache.client.default.cache]
+    arguments:
+      - # gets replaced in extension
 
   statistico:
     class: Fieg\Statistico\Statistico
