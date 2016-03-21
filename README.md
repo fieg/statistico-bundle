@@ -1,12 +1,12 @@
-FiegStatisticoBundle
-====================
+# StatisticoBundle
 
 Wrapper bundle for the [Statistico](https://github.com/fieg/statistico) library.
 
-[![Build Status](https://travis-ci.org/fieg/statistico-bundle.png?branch=master)](https://travis-ci.org/fieg/statistico-bundle)
+[![Build Status](https://travis-ci.org/fieg/statistico-bundle.svg?branch=master)](https://travis-ci.org/fieg/statistico-bundle)
+[![Code Coverage](https://scrutinizer-ci.com/g/fieg/statistico-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/fieg/statistico-bundle/)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fieg/statistico-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fieg/statistico-bundle/)
 
-Installation
-------------
+## Installation
 
 Using composer:
 
@@ -28,11 +28,10 @@ Configuration in `app/config/config.yml`:
 fieg_statistico:
   driver:
     redis:
-      client: @your_redis_service
+      client: 'your_redis_service'
 ```
 
-Usage
------
+## Usage
 
 Inject statistico into some service:
 
@@ -49,14 +48,14 @@ namespace Acme;
 
 class SomeService
 {
-  public function __construct(Statistico $statistico)
-  {
-    $this->statistico = $statistico;
-  }
-  
-  public function someAction()
-  {
-    $this->statistico->increment('some.statistic.indentitier');  // increases the statistic with 1
-  }
+    public function __construct(Statistico $statistico)
+    {
+        $this->statistico = $statistico;
+    }
+    
+    public function someAction()
+    {
+        $this->statistico->increment('some.statistic.indentitier');  // increases the statistic with 1
+    }
 }
 ```
