@@ -7,7 +7,7 @@ services:
   statistico:
     class: Fieg\Statistico\Statistico
     arguments:
-      - @statistico.driver.redis
+      - '@statistico.driver.redis'
 
   statistico.reader:
     class: Fieg\Statistico\Reader
