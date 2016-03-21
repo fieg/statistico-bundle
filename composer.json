@@ -3,8 +3,8 @@
     "license": "MIT",
     "minimum-stability": "stable",
     "require": {
-      "symfony/symfony": "~2.5",
-      "fieg/statistico": "~2.0"
+      "symfony/symfony": ">=2.5",
+      "fieg/statistico": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.1"
