@@ -1,17 +1,23 @@
+sudo: false
+
 language: php
 
 php:
-  - 5.6
   - 5.5
+  - 5.6
   - hhvm
+  - 7.0
 
 env:
+  matrix:
+    - SYMFONY_VERSION=2.5.*
+    - SYMFONY_VERSION=3.0.*
   global:
     - SYMFONY_ENV=test
 
 cache:
   directories:
-    - $HOME/.composer
+    - $HOME/.composer/cache
 
 matrix:
   fast_finish: true
@@ -21,7 +27,7 @@ matrix:
 
 before_script:
   - composer selfupdate
-  - composer install --no-interaction --no-scripts
+  - composer require --prefer-source --dev symfony/symfony:${SYMFONY_VERSION}
 
 script:
   - ./vendor/bin/phpunit
