@@ -3,12 +3,17 @@
 namespace Fieg\StatisticoBundle\Command;
 
 use Fieg\Statistico\Reader;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class BucketsCommand extends ContainerAwareCommand
+class BucketsCommand extends Command
 {
+    /**
+     * @var Reader
+     */
+    private $reader;
+
     protected function configure()
     {
         $this
@@ -16,12 +21,18 @@ class BucketsCommand extends ContainerAwareCommand
        ;
     }
 
+    /**
+     * @param Reader $reader
+     */
+    public function __construct(Reader $reader)
+    {
+        $this->reader = $reader;
+        parent::__construct();
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var Reader $reader */
-        $reader = $this->getContainer()->get('statistico.reader');
-
-        $buckets = $reader->getBuckets();
+        $buckets = $this->reader->getBuckets();
 
         foreach ($buckets as $bucket) {
             $output->writeln(sprintf('<info>%s</info>', $bucket));

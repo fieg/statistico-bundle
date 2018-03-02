@@ -13,3 +13,17 @@ services:
     class: Fieg\Statistico\Reader
     arguments:
       - '@statistico.driver.redis'
+
+  statistico.command.buckets:
+    class: Fieg\StatisticoBundle\Command\BucketsCommand
+    arguments:
+      - '@statistico.reader'
+    tags:
+      - { name: 'console.command' }
+
+  statistico.command.graph:
+    class: Fieg\StatisticoBundle\Command\GraphCommand
+    arguments:
+      - '@statistico.reader'
+    tags:
+      - { name: 'console.command' }
