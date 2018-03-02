@@ -3,12 +3,26 @@
 namespace Fieg\StatisticoBundle\Command;
 
 use Fieg\Statistico\Reader;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GraphCommand extends ContainerAwareCommand
+class GraphCommand extends Command
 {
+    /**
+     * @var Reader
+     */
+    private $reader;
+
+    /**
+     * @param Reader $reader
+     */
+    public function __construct(Reader $reader)
+    {
+        $this->reader = $reader;
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -20,13 +34,10 @@ class GraphCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         while (true) {
-            /** @var Reader $reader */
-            $reader = $this->getContainer()->get('statistico.reader');
-
             $from = new \DateTime('-1 minute');
             $to = new \DateTime();
 
-            $buckets = $reader->getBuckets();
+            $buckets = $this->reader->getBuckets();
             $bucketArgument = $input->getArgument('bucket');
 
             $buckets = array_filter(
@@ -46,7 +57,7 @@ class GraphCommand extends ContainerAwareCommand
             $out = [];
 
             foreach ($buckets as $bucket) {
-                $counts = $reader->queryCounts($bucket, 'seconds', $from, $to);
+                $counts = $this->reader->queryCounts($bucket, 'seconds', $from, $to);
                 $rpm = array_sum($counts);
 
                 $minX = $from->getTimestamp();
