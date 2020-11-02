@@ -18,7 +18,12 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('fieg_statistico');
-        $rootNode = $treeBuilder->getRootNode();
+
+        if (method_exists($treeBuilder, 'getRootNode')) { // Symfony 4 + 5
+            $rootNode = $treeBuilder->getRootNode();
+        } else { // Symfony 3
+            $rootNode = $treeBuilder->root('fieg_statistico');
+        }
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
